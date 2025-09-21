@@ -3,17 +3,110 @@
 <head>
   <title>Restaurant Menu</title>
   <style>
-    body { font-family: Arial; max-width: 600px; margin: auto; }
-    h1,h2 { text-align: center; }
-    .item { margin-bottom: 10px; }
+    /* General body styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 700px;
+      margin: 30px auto;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #d35400;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2980b9;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 24px;
+      border-bottom: 2px solid #2980b9;
+      padding-bottom: 5px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"] {
+      padding: 8px;
+      width: 100%;
+      max-width: 200px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px 15px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .item:hover {
+      background: #f1f1f1;
+    }
+
+    .item input[type="number"] {
+      width: 70px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #27ae60;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2ecc71;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 15px;
+      }
+      .item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .item input[type="number"] {
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
   </style>
 </head>
 <body>
 
 <h1>Restaurant Menu</h1>
 
-<label>Customer Name: <input type="text" id="customerName"></label><br>
-<label>Table Number: <input type="text" id="tableNumber"></label><br><br>
+<label>Customer Name: <input type="text" id="customerName"></label>
+<label>Table Number: <input type="text" id="tableNumber"></label>
 
 <h2>Pani Puri</h2>
 <div class="item">Sadi ₹30 <input type="number" id="paniPuriSadi" min="0" value="0"></div>
@@ -51,7 +144,6 @@
 <div class="item">Pepsi ₹20 <input type="number" id="pepsi" min="0" value="0"></div>
 <div class="item">Tetra Pack Fruti ₹10 <input type="number" id="tetraFruti" min="0" value="0"></div>
 
-<br>
 <button onclick="placeOrder()">Place Order</button>
 
 <script>
@@ -112,5 +204,6 @@ function placeOrder(){
     }).catch(err => alert("Error submitting order: "+err));
 }
 </script>
+
 </body>
 </html>
