@@ -132,8 +132,8 @@
 <button onclick="placeOrder()">Place Order</button>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwfXGSBI-4WCPtGTbdNqYiRsSaLmU1zxuK_LvaH7cUVEklktttUlTG4pjAUesAChAguAQ/exec";
-
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwfXGSBI-4WCPtGTbdNqYiRsSaLmU1zxuK_LvaH7cUVEklktttUlTG4pjAUesAChAguAQ/exec"; 
+  
 // Auto-set table number from URL query ?table=1, ?table=2 etc.
 const urlParams = new URLSearchParams(window.location.search);
 document.getElementById('tableNumber').value = urlParams.get('table') || '';
