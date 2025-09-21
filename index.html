@@ -91,6 +91,7 @@
 <h1>Restaurant Menu</h1>
 
 <label>Customer Name: <input type="text" id="customerName"></label>
+<label>Table Number: <input type="text" id="tableNumber" readonly></label>
 
 <h2>Pani Puri</h2>
 <div class="item">Sadi ₹30 <input type="number" id="paniPuriSadi" min="0" placeholder="0"></div>
@@ -135,44 +136,42 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwfXGSBI-4WCPtGTbdN
 
 // Auto-set table number from URL
 const urlParams = new URLSearchParams(window.location.search);
-const tableNumberFromURL = urlParams.get('table') || '';
-document.getElementById('tableNumber').value = tableNumberFromURL;
+document.getElementById('tableNumber').value = urlParams.get('table') || '';
 
-function placeOrder(){
+function placeOrder() {
   const orderData = {
     customerName: document.getElementById('customerName').value,
-    tableNumber: document.getElementById('tableNumber').value,
-    paniPuriSadi: parseInt(document.getElementById('paniPuriSadi').value)||0,
-    dahiPuri: parseInt(document.getElementById('dahiPuri').value)||0,
-    sevPuri: parseInt(document.getElementById('sevPuri').value)||0,
-    cheesePaniPuri: parseInt(document.getElementById('cheesePaniPuri').value)||0,
-    manchurian: parseInt(document.getElementById('manchurian').value)||0,
-    manchurianNoodles: parseInt(document.getElementById('manchurianNoodles').value)||0,
-    pavBhaji: parseInt(document.getElementById('pavBhaji').value)||0,
-    pulav: parseInt(document.getElementById('pulav').value)||0,
-    butterPavBhaji: parseInt(document.getElementById('butterPavBhaji').value)||0,
-    cheesePavBhaji: parseInt(document.getElementById('cheesePavBhaji').value)||0,
-    vadaPav: parseInt(document.getElementById('vadaPav').value)||0,
-    cheeseVadaPav: parseInt(document.getElementById('cheeseVadaPav').value)||0,
-    dabeli: parseInt(document.getElementById('dabeli').value)||0,
-    puff: parseInt(document.getElementById('puff').value)||0,
-    cheesePuff: parseInt(document.getElementById('cheesePuff').value)||0,
-    pattiSadaSamosa: parseInt(document.getElementById('pattiSadaSamosa').value)||0,
-    cheesePattiSamosa: parseInt(document.getElementById('cheesePattiSamosa').value)||0,
-    sprite: parseInt(document.getElementById('sprite').value)||0,
-    cocaCola: parseInt(document.getElementById('cocaCola').value)||0,
-    fanta: parseInt(document.getElementById('fanta').value)||0,
-    thumbsUp: parseInt(document.getElementById('thumbsUp').value)||0,
-    charged: parseInt(document.getElementById('charged').value)||0,
-    limca: parseInt(document.getElementById('limca').value)||0,
-    maza: parseInt(document.getElementById('maza').value)||0,
-    rimZim: parseInt(document.getElementById('rimZim').value)||0,
-    waterBottle: parseInt(document.getElementById('waterBottle').value)||0,
-    pepsi: parseInt(document.getElementById('pepsi').value)||0,
-    tetraFruti: parseInt(document.getElementById('tetraFruti').value)||0
+    tableNumber: document.getElementById('tableNumber').value || '0',
+    paniPuriSadi: parseInt(document.getElementById('paniPuriSadi').value) || 0,
+    dahiPuri: parseInt(document.getElementById('dahiPuri').value) || 0,
+    sevPuri: parseInt(document.getElementById('sevPuri').value) || 0,
+    cheesePaniPuri: parseInt(document.getElementById('cheesePaniPuri').value) || 0,
+    manchurian: parseInt(document.getElementById('manchurian').value) || 0,
+    manchurianNoodles: parseInt(document.getElementById('manchurianNoodles').value) || 0,
+    pavBhaji: parseInt(document.getElementById('pavBhaji').value) || 0,
+    pulav: parseInt(document.getElementById('pulav').value) || 0,
+    butterPavBhaji: parseInt(document.getElementById('butterPavBhaji').value) || 0,
+    cheesePavBhaji: parseInt(document.getElementById('cheesePavBhaji').value) || 0,
+    vadaPav: parseInt(document.getElementById('vadaPav').value) || 0,
+    cheeseVadaPav: parseInt(document.getElementById('cheeseVadaPav').value) || 0,
+    dabeli: parseInt(document.getElementById('dabeli').value) || 0,
+    puff: parseInt(document.getElementById('puff').value) || 0,
+    cheesePuff: parseInt(document.getElementById('cheesePuff').value) || 0,
+    pattiSadaSamosa: parseInt(document.getElementById('pattiSadaSamosa').value) || 0,
+    cheesePattiSamosa: parseInt(document.getElementById('cheesePattiSamosa').value) || 0,
+    sprite: parseInt(document.getElementById('sprite').value) || 0,
+    cocaCola: parseInt(document.getElementById('cocaCola').value) || 0,
+    fanta: parseInt(document.getElementById('fanta').value) || 0,
+    thumbsUp: parseInt(document.getElementById('thumbsUp').value) || 0,
+    charged: parseInt(document.getElementById('charged').value) || 0,
+    limca: parseInt(document.getElementById('limca').value) || 0,
+    maza: parseInt(document.getElementById('maza').value) || 0,
+    rimZim: parseInt(document.getElementById('rimZim').value) || 0,
+    waterBottle: parseInt(document.getElementById('waterBottle').value) || 0,
+    pepsi: parseInt(document.getElementById('pepsi').value) || 0,
+    tetraFruti: parseInt(document.getElementById('tetraFruti').value) || 0
   };
 
-  // Calculate total
   orderData.total = orderData.paniPuriSadi*30 + orderData.dahiPuri*50 + orderData.sevPuri*50 + orderData.cheesePaniPuri*60 +
                     orderData.manchurian*50 + orderData.manchurianNoodles*60 +
                     orderData.pavBhaji*80 + orderData.pulav*70 + orderData.butterPavBhaji*100 + orderData.cheesePavBhaji*120 +
@@ -183,14 +182,20 @@ function placeOrder(){
 
   fetch(WEB_APP_URL, {
     method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(orderData)
-  }).then(res => res.json())
-    .then(res => {
-      if(res.status=="success"){
-        alert("Order placed successfully!");
-        location.reload();
-      }
-    }).catch(err => alert("Error submitting order: "+err));
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === "success") {
+      alert("Order placed successfully!");
+      location.reload();
+    } else {
+      alert("Error: " + JSON.stringify(data));
+    }
+  })
+  .catch(error => alert("Error submitting order: " + error));
 }
 </script>
 </body>
