@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant Menu</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; }
+    h1,h2 { text-align: center; }
+    .item { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>Restaurant Menu</h1>
+
+<label>Customer Name: <input type="text" id="customerName"></label><br>
+<label>Table Number: <input type="text" id="tableNumber"></label><br><br>
+
+<h2>Pani Puri</h2>
+<div class="item">Sadi ₹30 <input type="number" id="paniPuriSadi" min="0" value="0"></div>
+<div class="item">Dahi Puri ₹50 <input type="number" id="dahiPuri" min="0" value="0"></div>
+<div class="item">Sev Puri ₹50 <input type="number" id="sevPuri" min="0" value="0"></div>
+<div class="item">Cheese Pani Puri ₹60 <input type="number" id="cheesePaniPuri" min="0" value="0"></div>
+
+<h2>Chinese</h2>
+<div class="item">Manchurian ₹50 <input type="number" id="manchurian" min="0" value="0"></div>
+<div class="item">Manchurian Noodles ₹60 <input type="number" id="manchurianNoodles" min="0" value="0"></div>
+
+<h2>Other</h2>
+<div class="item">Pav Bhaji ₹80 <input type="number" id="pavBhaji" min="0" value="0"></div>
+<div class="item">Pulav ₹70 <input type="number" id="pulav" min="0" value="0"></div>
+<div class="item">Butter Pav Bhaji ₹100 <input type="number" id="butterPavBhaji" min="0" value="0"></div>
+<div class="item">Cheese Pav Bhaji ₹120 <input type="number" id="cheesePavBhaji" min="0" value="0"></div>
+<div class="item">Vada Pav ₹20 <input type="number" id="vadaPav" min="0" value="0"></div>
+<div class="item">Cheese Vada Pav ₹35 <input type="number" id="cheeseVadaPav" min="0" value="0"></div>
+<div class="item">Dabeli ₹20 <input type="number" id="dabeli" min="0" value="0"></div>
+<div class="item">Puff ₹20 <input type="number" id="puff" min="0" value="0"></div>
+<div class="item">Cheese Puff ₹35 <input type="number" id="cheesePuff" min="0" value="0"></div>
+<div class="item">Patti Sada Samosa ₹30 (4 pcs) <input type="number" id="pattiSadaSamosa" min="0" value="0"></div>
+<div class="item">Cheese Patti Samosa ₹40 (4 pcs) <input type="number" id="cheesePattiSamosa" min="0" value="0"></div>
+
+<h2>Beverages</h2>
+<div class="item">Sprite ₹20 <input type="number" id="sprite" min="0" value="0"></div>
+<div class="item">Coca-Cola ₹20 <input type="number" id="cocaCola" min="0" value="0"></div>
+<div class="item">Fanta ₹20 <input type="number" id="fanta" min="0" value="0"></div>
+<div class="item">Thumbs Up ₹20 <input type="number" id="thumbsUp" min="0" value="0"></div>
+<div class="item">Charged ₹20 <input type="number" id="charged" min="0" value="0"></div>
+<div class="item">Limca ₹20 <input type="number" id="limca" min="0" value="0"></div>
+<div class="item">Maza ₹20 <input type="number" id="maza" min="0" value="0"></div>
+<div class="item">Rim-zim ₹20 <input type="number" id="rimZim" min="0" value="0"></div>
+<div class="item">Water Bottle ₹20 <input type="number" id="waterBottle" min="0" value="0"></div>
+<div class="item">Pepsi ₹20 <input type="number" id="pepsi" min="0" value="0"></div>
+<div class="item">Tetra Pack Fruti ₹10 <input type="number" id="tetraFruti" min="0" value="0"></div>
+
+<br>
+<button onclick="placeOrder()">Place Order</button>
+
+<script>
+const WEB_APP_URL = "PASTE_YOUR_WEB_APP_URL_HERE"; // replace with your Web App URL
+
+function placeOrder(){
+  const orderData = {
+    customerName: document.getElementById('customerName').value,
+    tableNumber: document.getElementById('tableNumber').value,
+    paniPuriSadi: parseInt(document.getElementById('paniPuriSadi').value)||0,
+    dahiPuri: parseInt(document.getElementById('dahiPuri').value)||0,
+    sevPuri: parseInt(document.getElementById('sevPuri').value)||0,
+    cheesePaniPuri: parseInt(document.getElementById('cheesePaniPuri').value)||0,
+    manchurian: parseInt(document.getElementById('manchurian').value)||0,
+    manchurianNoodles: parseInt(document.getElementById('manchurianNoodles').value)||0,
+    pavBhaji: parseInt(document.getElementById('pavBhaji').value)||0,
+    pulav: parseInt(document.getElementById('pulav').value)||0,
+    butterPavBhaji: parseInt(document.getElementById('butterPavBhaji').value)||0,
+    cheesePavBhaji: parseInt(document.getElementById('cheesePavBhaji').value)||0,
+    vadaPav: parseInt(document.getElementById('vadaPav').value)||0,
+    cheeseVadaPav: parseInt(document.getElementById('cheeseVadaPav').value)||0,
+    dabeli: parseInt(document.getElementById('dabeli').value)||0,
+    puff: parseInt(document.getElementById('puff').value)||0,
+    cheesePuff: parseInt(document.getElementById('cheesePuff').value)||0,
+    pattiSadaSamosa: parseInt(document.getElementById('pattiSadaSamosa').value)||0,
+    cheesePattiSamosa: parseInt(document.getElementById('cheesePattiSamosa').value)||0,
+    sprite: parseInt(document.getElementById('sprite').value)||0,
+    cocaCola: parseInt(document.getElementById('cocaCola').value)||0,
+    fanta: parseInt(document.getElementById('fanta').value)||0,
+    thumbsUp: parseInt(document.getElementById('thumbsUp').value)||0,
+    charged: parseInt(document.getElementById('charged').value)||0,
+    limca: parseInt(document.getElementById('limca').value)||0,
+    maza: parseInt(document.getElementById('maza').value)||0,
+    rimZim: parseInt(document.getElementById('rimZim').value)||0,
+    waterBottle: parseInt(document.getElementById('waterBottle').value)||0,
+    pepsi: parseInt(document.getElementById('pepsi').value)||0,
+    tetraFruti: parseInt(document.getElementById('tetraFruti').value)||0
+  };
+
+  // calculate total
+  orderData.total = orderData.paniPuriSadi*30 + orderData.dahiPuri*50 + orderData.sevPuri*50 + orderData.cheesePaniPuri*60 +
+                    orderData.manchurian*50 + orderData.manchurianNoodles*60 +
+                    orderData.pavBhaji*80 + orderData.pulav*70 + orderData.butterPavBhaji*100 + orderData.cheesePavBhaji*120 +
+                    orderData.vadaPav*20 + orderData.cheeseVadaPav*35 + orderData.dabeli*20 + orderData.puff*20 + orderData.cheesePuff*35 +
+                    orderData.pattiSadaSamosa*30 + orderData.cheesePattiSamosa*40 +
+                    orderData.sprite*20 + orderData.cocaCola*20 + orderData.fanta*20 + orderData.thumbsUp*20 + orderData.charged*20 +
+                    orderData.limca*20 + orderData.maza*20 + orderData.rimZim*20 + orderData.waterBottle*20 + orderData.pepsi*20 + orderData.tetraFruti*10;
+
+  fetch(WEB_APP_URL, {
+    method: 'POST',
+    body: JSON.stringify(orderData)
+  }).then(res => res.json())
+    .then(res => {
+      if(res.status=="success"){
+        alert("Order placed successfully!");
+        location.reload();
+      }
+    }).catch(err => alert("Error submitting order: "+err));
+}
+</script>
+</body>
+</html>
