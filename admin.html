@@ -3,86 +3,61 @@
 <head>
   <title>Admin Dashboard</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 30px;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #2980b9;
-      margin-bottom: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #2980b9;
-      color: white;
-    }
-    tr:hover {background-color: #f1f1f1;}
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { text-align: center; color: #2980b9; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: #2980b9; color: #fff; }
+    tr:hover { background: #f1f1f1; }
   </style>
 </head>
 <body>
+  <h1>Admin Dashboard - Orders</h1>
 
-<h1>Admin Dashboard - Orders</h1>
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Customer Name</th>
+        <th>Table</th>
+        <th>Pani Puri Sadi</th>
+        <th>Dahi Puri</th>
+        <th>Sev Puri</th>
+        <th>Cheese Pani Puri</th>
+        <th>Manchurian</th>
+        <th>Pav Bhaji</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-<table id="ordersTable">
-  <thead>
-    <tr>
-      <th>Timestamp</th>
-      <th>Customer Name</th>
-      <th>Table Number</th>
-      <th>Pani Puri Sadi</th>
-      <th>Dahi Puri</th>
-      <th>Sev Puri</th>
-      <th>Cheese Pani Puri</th>
-      <th>Manchurian</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Orders will load here -->
-  </tbody>
-</table>
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwfXGSBI-4WCPtGTbdNqYiRsSaLmU1zxuK_LvaH7cUVEklktttUlTG4pjAUesAChAguAQ/exec";
 
-<script>
-const WEB_APP_URL = "PASTE_YOUR_WEB_APP_URL_HERE?getOrders=true"; // Use your Web App URL that returns all orders in JSON
-
-// Fetch and display orders
-fetch(WEB_APP_URL)
-  .then(response => response.json())
-  .then(data => {
-    const tbody = document.getElementById('ordersTable').querySelector('tbody');
-    tbody.innerHTML = ''; // Clear previous data
-    data.forEach(order => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${order.timestamp}</td>
-        <td>${order.customerName}</td>
-        <td>${order.tableNumber}</td>
-        <td>${order.paniPuriSadi}</td>
-        <td>${order.dahiPuri}</td>
-        <td>${order.sevPuri}</td>
-        <td>${order.cheesePaniPuri}</td>
-        <td>${order.manchurian}</td>
-        <td>${order.total}</td>
-      `;
-      tbody.appendChild(row);
-    });
-  })
-  .catch(err => alert("Error loading orders: " + err));
-</script>
-
+    fetch(WEB_APP_URL)
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById("ordersTable").querySelector("tbody");
+        tbody.innerHTML = "";
+        data.forEach(order => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${order.timestamp}</td>
+            <td>${order.customerName}</td>
+            <td>${order.tableNumber}</td>
+            <td>${order.paniPuriSadi}</td>
+            <td>${order.dahiPuri}</td>
+            <td>${order.sevPuri}</td>
+            <td>${order.cheesePaniPuri}</td>
+            <td>${order.manchurian}</td>
+            <td>${order.pavBhaji}</td>
+            <td>${order.total}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(err => alert("Error loading orders: " + err));
+  </script>
 </body>
 </html>
