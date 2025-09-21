@@ -3,7 +3,6 @@
 <head>
   <title>Restaurant Menu</title>
   <style>
-    /* General body styling */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       max-width: 700px;
@@ -60,13 +59,9 @@
       transition: 0.3s;
     }
 
-    .item:hover {
-      background: #f1f1f1;
-    }
+    .item:hover { background: #f1f1f1; }
 
-    .item input[type="number"] {
-      width: 70px;
-    }
+    .item input[type="number"] { width: 70px; }
 
     button {
       display: block;
@@ -82,22 +77,12 @@
       transition: 0.3s;
     }
 
-    button:hover {
-      background: #2ecc71;
-    }
+    button:hover { background: #2ecc71; }
 
     @media (max-width: 500px) {
-      body {
-        padding: 15px;
-      }
-      .item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .item input[type="number"] {
-        width: 100%;
-        margin-top: 8px;
-      }
+      body { padding: 15px; }
+      .item { flex-direction: column; align-items: flex-start; }
+      .item input[type="number"] { width: 100%; margin-top: 8px; }
     }
   </style>
 </head>
@@ -106,7 +91,7 @@
 <h1>Restaurant Menu</h1>
 
 <label>Customer Name: <input type="text" id="customerName"></label>
-
+<label>Table Number: <input type="text" id="tableNumber" readonly></label>
 
 <h2>Pani Puri</h2>
 <div class="item">Sadi ₹30 <input type="number" id="paniPuriSadi" min="0" placeholder="0"></div>
@@ -147,7 +132,7 @@
 <button onclick="placeOrder()">Place Order</button>
 
 <script>
-const WEB_APP_URL = "PASTE_YOUR_WEB_APP_URL_HERE"; // replace with your Web App URL
+const WEB_APP_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec"; // Replace with your Google Apps Script URL
 
 // Auto-set table number from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -188,7 +173,7 @@ function placeOrder(){
     tetraFruti: parseInt(document.getElementById('tetraFruti').value)||0
   };
 
-  // calculate total
+  // Calculate total
   orderData.total = orderData.paniPuriSadi*30 + orderData.dahiPuri*50 + orderData.sevPuri*50 + orderData.cheesePaniPuri*60 +
                     orderData.manchurian*50 + orderData.manchurianNoodles*60 +
                     orderData.pavBhaji*80 + orderData.pulav*70 + orderData.butterPavBhaji*100 + orderData.cheesePavBhaji*120 +
@@ -209,7 +194,5 @@ function placeOrder(){
     }).catch(err => alert("Error submitting order: "+err));
 }
 </script>
-
 </body>
 </html>
-s
