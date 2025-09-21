@@ -189,14 +189,14 @@ function placeOrder() {
   })
   .then(response => response.json())
   .then(data => {
-    if(data.status === "success") {
-      alert("Order placed successfully!");
+    if(data.result === "success" || data.status === "success") {
+      alert("✅ Order placed successfully!");
       location.reload();
     } else {
-      alert("Error: " + JSON.stringify(data));
+      alert("❌ Error: " + JSON.stringify(data));
     }
   })
-  .catch(error => alert("Error submitting order: " + error));
+  .catch(error => alert("⚠️ Error submitting order: " + error));
 }
 </script>
 
